@@ -1,8 +1,9 @@
 " Vim syntax file
 " Language:      Maude <http://maude.cs.uiuc.edu/>
 " Maintainer:    Steven N. Severinghaus <sns@severinghaus.org>
-" Last Modified: 2005-02-03
-" Version: 0.1
+" Contributor:   Stephen Skeirik <skeirik2@illinois.edu>
+" Last Modified: 2018-12-01
+" Version: 0.2
 
 " Quit if syntax file is already loaded
 if version < 600
@@ -13,22 +14,23 @@ endif
 
 command! -nargs=+ MaudeHiLink hi def link <args>
 
+syn match   maudeVariable   "[A-Z][a-zA-Z0-9']*"
+syn keyword Todo            TODO contained
 syn keyword maudeModule     mod fmod omod endm endfm endm is
-syn keyword maudeImports    protecting including extending
-syn keyword maudeSorts      sorts subsorts
-syn keyword maudeStatements op ops var vars eq ceq
+syn keyword maudeImports    pr protecting inc including ex extending
+syn keyword maudeStatements sort sorts subsort subsorts
+syn keyword maudeStatements op ops var vars eq ceq rl crl if
 syn match   maudeFlags      "\[.*\]"
-syn keyword maudeCommands   reduce
-syn match   maudeComment    "\*\*\*.*"
-syn match   maudeComment    "---.*"
+syn keyword maudeCommands   red reduce rew rewrite in load sload select
+syn match   maudeComment    "\*\*\*.*" contains=Todo
+syn match   maudeComment    "---.*" contains=Todo
 syn match   maudeOps        "->"
 syn match   maudeOps        ":"
-"syn match   maudeOps        "^\s*subsorts[^<]*<"hs=e-1
-"syn match   maudeOps        "^\s*ceq[^=]*="
 syn match   maudeOps        "="
 syn match   maudeOps        "\.\s*$"
+syn match   maudeOps        "=>"
 
-syn keyword maudeModules    INT FLOAT NAT RAT BOOL QID TRUTH IDENTICAL STRING
+syn keyword maudeModules    INT FLOAT NAT RAT BOOL QID TRUTH STRING
 syn keyword maudeModules    CONVERSION
 syn match   maudeModules    "TRUTH-VALUE"
 syn match   maudeModules    "EXT-BOOL"
@@ -45,7 +47,7 @@ syn keyword maudeSorts      String Char FindResult DecFloat
 
 syn keyword maudeAttrs      assoc comm idem iter id left-id right-id strat memo
 syn keyword maudeAttrs      prec gather format ctor config object msg frozen
-syn keyword maudeAttrs      poly special label metadata owise nonexec
+syn keyword maudeAttrs      poly special label metadata owise nonexec variant
 
 " Meta stuff; this may not actually be useful
 syn keyword maudeSorts      Sort Kind Type
@@ -81,6 +83,8 @@ syn keyword maudeStatements and or xor not implies
 syn keyword maudeLiteral    true false
 syn match   maudeLiteral    "\<\(0[0-7]*\|0[xX]\x\+\|\d\+\)[lL]\=\>"
 syn match   maudeLiteral    "\(\<\d\+\.\d*\|\.\d\+\)\([eE][-+]\=\d\+\)\=[fFdD]\="
+syn region  maudeString     start=/\v"/ skip=/\v\\./ end=/\v"/
+syn match   maudeQid        "'\S\+"
 
 MaudeHiLink maudeModule     PreProc
 MaudeHiLink maudeImports    PreProc
@@ -92,12 +96,13 @@ MaudeHiLink maudeOps        Special
 MaudeHiLink maudeCommands   Special
 MaudeHiLink maudeFlags      PreProc
 MaudeHiLink maudeSorts      Type
-MaudeHiLink maudeLiteral    String
-"hi def     maudeMisc       term=bold cterm=bold gui=bold
+MaudeHiLink maudeLiteral    Constant
+MaudeHiLink maudeString     String
+MaudeHiLink maudeQid        Identifier
+MaudeHiLink maudeVariable   Identifier
 
 delcommand MaudeHiLink
-  
+
 let b:current_syntax = "maude"
 
 "EOF vim: tw=78:ft=vim:ts=8
-
