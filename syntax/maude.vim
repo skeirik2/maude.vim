@@ -14,7 +14,6 @@ endif
 
 command! -nargs=+ MaudeHiLink hi def link <args>
 
-syn match   maudeVariable   "[A-Z][a-zA-Z0-9']*"
 syn keyword Todo            TODO contained
 syn keyword maudeModule     mod fmod omod endm endfm endm is
 syn keyword maudeImports    pr protecting inc including ex extending
@@ -84,7 +83,7 @@ syn keyword maudeLiteral    true false
 syn match   maudeLiteral    "\<\(0[0-7]*\|0[xX]\x\+\|\d\+\)[lL]\=\>"
 syn match   maudeLiteral    "\(\<\d\+\.\d*\|\.\d\+\)\([eE][-+]\=\d\+\)\=[fFdD]\="
 syn region  maudeString     start=/\v"/ skip=/\v\\./ end=/\v"/
-syn match   maudeQid        "'\S\+"
+syn match   maudeQid        "'[^[\]() \t]\+"
 
 MaudeHiLink maudeModule     PreProc
 MaudeHiLink maudeImports    PreProc
@@ -99,7 +98,6 @@ MaudeHiLink maudeSorts      Type
 MaudeHiLink maudeLiteral    Constant
 MaudeHiLink maudeString     String
 MaudeHiLink maudeQid        Identifier
-MaudeHiLink maudeVariable   Identifier
 
 delcommand MaudeHiLink
 
