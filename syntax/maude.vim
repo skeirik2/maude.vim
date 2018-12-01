@@ -83,7 +83,7 @@ syn keyword maudeLiteral    true false
 syn match   maudeLiteral    "\<\(0[0-7]*\|0[xX]\x\+\|\d\+\)[lL]\=\>"
 syn match   maudeLiteral    "\(\<\d\+\.\d*\|\.\d\+\)\([eE][-+]\=\d\+\)\=[fFdD]\="
 syn region  maudeString     start=/\v"/ skip=/\v\\./ end=/\v"/
-syn match   maudeQid        "'[^[\]() \t]\+"
+syn match   maudeQid        "'\%([^[\](){}`, \t]\|`[[\](){}, ]\)\+"
 
 MaudeHiLink maudeModule     PreProc
 MaudeHiLink maudeImports    PreProc
