@@ -14,12 +14,13 @@ endif
 
 command! -nargs=+ MaudeHiLink hi def link <args>
 
+" this highlight matches too often and is annoying
+" syn match   maudeFlags      "\[.*\]"
 syn keyword Todo            TODO contained
 syn keyword maudeModule     mod fmod omod endm endfm endm is
 syn keyword maudeImports    pr protecting inc including ex extending
 syn keyword maudeStatements sort sorts subsort subsorts
 syn keyword maudeStatements op ops var vars eq ceq rl crl if
-syn match   maudeFlags      "\[.*\]"
 syn keyword maudeCommands   red reduce rew rewrite in load sload select
 syn match   maudeComment    "\*\*\*.*" contains=Todo
 syn match   maudeComment    "---.*" contains=Todo
