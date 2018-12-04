@@ -16,7 +16,7 @@ command! -nargs=+ MaudeHiLink hi def link <args>
 
 " this highlight matches too often and is annoying
 " syn match   maudeFlags      "\[.*\]"
-syn keyword Todo            TODO contained
+syn keyword Todo            TODO FIXME contained
 syn keyword maudeModule     mod fmod omod endm endfm endm is
 syn keyword maudeImports    pr protecting inc including ex extending
 syn keyword maudeStatements sort sorts subsort subsorts
